@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { useRef } from 'react';
 
-function App() {
+const App = () => {
+  const userText = useRef("");
+
+  const handleClick = event => {
+    // Access textarea value
+    console.log(userText.current.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <label htmlFor="message">User form</label>
+      <textarea ref={userText} id="message" name="message" rows="30" cols="75" />
+
+      <button onClick={handleClick}>Click</button>
+    </main>
   );
-}
+};
+
 
 export default App;
