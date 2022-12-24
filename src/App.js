@@ -33,21 +33,27 @@ import MDEditor from '@uiw/react-md-editor';
 
 // MD Editor
 const App = () => {
-  const [value, setValue] = useState("**Hello world!!!**");
+  const [value, setValue] = useState("");
+
+  function logValue() {
+    console.log("String:\n", value);
+    console.log("Object:\n", JSON.stringify(value))
+    console.log("Reconverted:\n", JSON.parse(JSON.stringify(value)))
+  }
 
   return (
-    <div className="container">
+    <form className="container" name="markdownPage">
       <MDEditor
         value={value}
         onChange={setValue}
       />
 
-      <h1>Your generated page!</h1>
-      <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
+      {value ? <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} /> : null}
 
       {/* Can be safely and easily converted back and forth from string to JSON object without any issues */}
-      <MDEditor.Markdown source={JSON.parse(JSON.stringify(value))} style={{ whiteSpace: 'pre-wrap' }} />
-    </div>
+      {/* <MDEditor.Markdown source={JSON.parse(JSON.stringify(value))} style={{ whiteSpace: 'pre-wrap' }} /> */}
+      <h2 onClick={logValue}>Test button</h2>
+    </form>
   );
 }
 
